@@ -1,22 +1,25 @@
 const http = require("http");
 const fs = require("fs");
-const url = require("url")
-const path = require("path");
+const url = require("url");
 const port = 4000;
 
 
+
+
 let server = http.createServer((req,res) => {
-  if(req.url === "/") {
-    res.write("Hello Node.js!")
-    res.end
-  }
-  else {
-    console.log("Write a correct url")
-  }
-})
+    const pathName = url.parse(req.url).pathname;
 
 
+    if(pathName === '/') {
+       res.end("Home page!")
+        return
+    } else if(pathName === '/about') {
+        res.end("Second page!");
+        return;
+    }})
+    
 
-server.listen(() => {
-  console.log("The server run!!!")
+
+server.listen(port,() => {
+    console.log("The server run!!!")
 })
